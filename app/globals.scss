@@ -1,0 +1,101 @@
+/* ─── Custom scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 2px;
+
+  &:hover {
+    background: var(--color-text-secondary);
+  }
+}
+
+/* ─── Custom cursor ─────────────────────────────────────────────────────── */
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-text-primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.cursor-ring {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(245, 245, 240, 0.35);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.2s, width 0.2s, height 0.2s;
+}
+
+/* ─── Nav link with animated line ──────────────────────────────────────── */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 1px;
+    background: var(--color-text-secondary);
+    flex-shrink: 0;
+    transition: width 200ms ease, background 200ms ease;
+  }
+
+  &.active,
+  &:hover {
+    &::before {
+      width: 32px;
+      background: var(--color-text-primary);
+    }
+  }
+}
+
+/* ─── Keyframe animations ───────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+/* Stagger delays */
+@for $i from 1 through 8 {
+  .anim-delay-#{$i} {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
